@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../models/habit.dart';
+import '../../models/habit.dart';
+import '../widgets/habit_tile.dart';
+import '../widgets/input_field.dart';
 
 class HabitListPage extends StatefulWidget {
   const HabitListPage({super.key});
@@ -19,13 +21,11 @@ class _HabitListPageState extends State<HabitListPage> {
       Hive.box<Habit>('habits').add(habit);
       _habitController.clear();
       FocusScope.of(context).unfocus();
-      setState(() {});
     }
   }
 
   void _deleteHabit(int index) {
     Hive.box<Habit>('habits').deleteAt(index);
-    setState(() {});
   }
 
   @override
@@ -36,22 +36,9 @@ class _HabitListPageState extends State<HabitListPage> {
       appBar: AppBar(title: const Text('My Habits')),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _habitController,
-                    decoration: const InputDecoration(hintText: 'Enter a habit'),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.add),
-                  onPressed: _addHabit,
-                )
-              ],
-            ),
+          InputField(
+            controller: _habitController,
+            onAdd: _addHabit,
           ),
           Expanded(
             child: ValueListenableBuilder(
@@ -64,19 +51,17 @@ class _HabitListPageState extends State<HabitListPage> {
                   itemCount: box.length,
                   itemBuilder: (context, index) {
                     final habit = box.getAt(index);
-                    return ListTile(
-                      title: Text(habit?.title ?? ''),
-                      subtitle: Text(habit?.createdAt.toLocal().toString() ?? ''),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () => _deleteHabit(index),
-                      ),
+                    if (habit == null) return const SizedBox.shrink();
+
+                    return HabitTile(
+                      habit: habit,
+                      onDelete: () => _deleteHabit(index),
                     );
                   },
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );

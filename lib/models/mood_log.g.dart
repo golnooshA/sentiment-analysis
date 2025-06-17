@@ -8,7 +8,7 @@ part of 'mood_log.dart';
 
 class MoodLogAdapter extends TypeAdapter<MoodLog> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
   MoodLog read(BinaryReader reader) {

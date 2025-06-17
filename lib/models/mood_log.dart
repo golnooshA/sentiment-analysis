@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 part 'mood_log.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class MoodLog extends HiveObject {
   @HiveField(0)
   String moodText;

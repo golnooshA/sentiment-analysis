@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'habit_entry.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 1)
 class HabitEntry extends HiveObject {
   @HiveField(0)
   String habitTitle;

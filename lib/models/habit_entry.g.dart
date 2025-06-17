@@ -8,7 +8,7 @@ part of 'habit_entry.dart';
 
 class HabitEntryAdapter extends TypeAdapter<HabitEntry> {
   @override
-  final int typeId = 2;
+  final int typeId = 1;
 
   @override
   HabitEntry read(BinaryReader reader) {
