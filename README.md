@@ -78,14 +78,8 @@ flutter:
   assets:
     - assets/model/sentiment_model.tflite
     - assets/model/tokenizer.json
+
 ```
-
-## 👤 Developer
-
-* **Name:** \[Your Name]
-* **GitHub:** [@your-username](https://github.com/your-username)
-* **Stack:** Dart, Flutter, TFLite, Hive
-
 ---
 
 ## 📝 License
@@ -113,7 +107,7 @@ MIT License © 2025
       <img src="assets/screens/mood_log.png" width="120" /><br>
     </td>
     <td align="center">
-      <img src="assets/screens/mood_trends" width="120" /><br>
+      <img src="assets/screens/mood_trends.png" width="120" /><br>
     </td>
   </tr>
 </table>
