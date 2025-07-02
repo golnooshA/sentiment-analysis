@@ -80,13 +80,6 @@ flutter:
     - assets/model/tokenizer.json
 
 ```
----
-
-## 📝 License
-
-MIT License © 2025
-
----
 
 ## 📈 Screenshots
 
@@ -112,4 +105,4 @@ MIT License © 2025
   </tr>
 </table>
 
----
+
