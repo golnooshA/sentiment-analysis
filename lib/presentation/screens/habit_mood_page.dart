@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:sentiment_chatbot/presentation/widgets/app_bar.dart';
+import '../../core/config/design_config.dart';
 import '../../models/habit_entry.dart';
 import '../../models/mood_log.dart';
 import '../../utils/mood_aggregation.dart';
@@ -11,7 +13,9 @@ class HabitMoodInsightPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Habit Impact on Mood')),
+      appBar: const AppBarDesign(title: 'Habit Impact on Mood'),
+      backgroundColor: DesignConfig.backgroundColor,
+
       body: FutureBuilder(
         future: Future.wait([
           Hive.openBox<HabitEntry>('habit_entries'),

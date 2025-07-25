@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import '../../core/config/design_config.dart';
 import '../../models/mood_log.dart';
 import '../../utils/mood_classifier.dart';
+import '../widgets/app_bar.dart';
 import '../widgets/mood_input_field.dart';
 import '../widgets/mood_save_button.dart';
 
@@ -64,7 +66,8 @@ class _MoodLogPageState extends State<MoodLogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Mood Log')),
+      appBar: const AppBarDesign(title: 'Mood Log'),
+      backgroundColor: DesignConfig.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

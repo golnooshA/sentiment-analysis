@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:sentiment_chatbot/presentation/widgets/app_bar.dart';
+import 'package:sentiment_chatbot/presentation/widgets/checkbox_tile.dart';
+import 'package:sentiment_chatbot/presentation/widgets/mood_save_button.dart';
 import '../../core/config/design_config.dart';
 import '../../models/habit.dart';
 import '../../models/habit_entry.dart';
-import '../widgets/checkbox_tile.dart';
 
-class HabitEntryPage extends StatefulWidget {
-  const HabitEntryPage({super.key});
+class TodayHabitsPage extends StatefulWidget {
+  const TodayHabitsPage({super.key});
 
   @override
-  State<HabitEntryPage> createState() => _HabitEntryPageState();
+  State<TodayHabitsPage> createState() => _TodayHabitsPageState();
 }
 
-class _HabitEntryPageState extends State<HabitEntryPage> {
+class _TodayHabitsPageState extends State<TodayHabitsPage> {
   final Map<String, bool> _selectedHabits = {};
   bool _isLoading = true;
 
@@ -39,11 +41,11 @@ class _HabitEntryPageState extends State<HabitEntryPage> {
     final today = DateTime.now();
     final todayDate = DateTime(today.year, today.month, today.day);
 
-    for (var habit in _selectedHabits.entries) {
+    for (var entry in _selectedHabits.entries) {
       await entryBox.add(HabitEntry(
-        habitTitle: habit.key,
+        habitTitle: entry.key,
         date: todayDate,
-        done: habit.value,
+        done: entry.value,
       ));
     }
 
@@ -55,18 +57,22 @@ class _HabitEntryPageState extends State<HabitEntryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Today Habits')),
+      appBar: const AppBarDesign(title: 'Today Habits'),
+      backgroundColor: DesignConfig.backgroundColor,
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _selectedHabits.isEmpty
           ? const Center(
         child: Text(
           '📝 No habits found. Please add one first!',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(
+            fontSize: DesignConfig.headerSize,
+            color: DesignConfig.subTextColor,
+          ),
         ),
       )
           : Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: ListView(
           children: _selectedHabits.entries.map((entry) {
             return CheckboxTile(
@@ -79,13 +85,11 @@ class _HabitEntryPageState extends State<HabitEntryPage> {
           }).toList(),
         ),
       ),
-      floatingActionButton: _selectedHabits.isEmpty
+      bottomNavigationBar: _selectedHabits.isEmpty
           ? null
-          : FloatingActionButton.extended(
-        onPressed: _saveEntries,
-        icon: const Icon(Icons.save, color: DesignConfig.textColor),
-        label: const Text('Save', style: TextStyle(color: DesignConfig.textColor)),
-        backgroundColor: DesignConfig.saveButtonColor,
+          : Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 40),
+        child: MoodSaveButton(onPressed: _saveEntries),
       ),
     );
   }

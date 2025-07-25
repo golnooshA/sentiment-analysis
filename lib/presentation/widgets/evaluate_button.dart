@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import '../../core/config/design_config.dart';
 
 class EvaluateButton extends StatelessWidget {
   final String label;
   final Color backgroundColor;
-  final Color textColor;
   final VoidCallback onPressed;
+  final Size size;
+  final BorderRadius? borderRadius;
 
   const EvaluateButton({
     super.key,
     required this.label,
     required this.backgroundColor,
-    required this.textColor,
     required this.onPressed,
+    this.size = const Size(double.infinity, 60),
+    this.borderRadius,
   });
 
   @override
@@ -19,14 +22,21 @@ class EvaluateButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
-        minimumSize: const Size(300, 60),
-        textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        minimumSize: size,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: borderRadius ?? BorderRadius.circular(12),
         ),
       ),
       onPressed: onPressed,
-      child: Text(label, style: TextStyle(color: textColor)),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontWeight: DesignConfig.semiBold,
+          fontSize: DesignConfig.buttonTextSize,
+          color: DesignConfig.textColor,
+          inherit: true,
+        ),
+      ),
     );
   }
 }

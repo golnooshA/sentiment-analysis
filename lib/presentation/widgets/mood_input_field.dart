@@ -11,14 +11,18 @@ class MoodInputField extends StatelessWidget {
     return TextField(
       controller: controller,
       maxLines: 3,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'How are you feeling today?',
-        labelStyle: TextStyle(color: DesignConfig.textFieldColor),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: DesignConfig.textFieldColor),
-        ),
+        labelStyle: const TextStyle(color: DesignConfig.textFieldColor),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: DesignConfig.textFieldColor, width: 2),
+          borderSide: const BorderSide(
+              color: DesignConfig.addHabbitColor, width: 2),
+          borderRadius: DesignConfig.border,
+        ),
+        enabledBorder:  OutlineInputBorder(
+          borderSide: const BorderSide(
+              color: DesignConfig.addHabbitColor),
+          borderRadius: DesignConfig.border,
         ),
       ),
     );

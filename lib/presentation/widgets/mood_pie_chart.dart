@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:sentiment_chatbot/core/config/design_config.dart';
 
 class MoodPieChart extends StatelessWidget {
   final int positive;
@@ -21,21 +22,33 @@ class MoodPieChart extends StatelessWidget {
         PieChartData(
           sections: [
             PieChartSectionData(
-              color: Colors.green,
+              color: DesignConfig.saveButtonColor,
               value: positive.toDouble(),
               title: '😊 $positive',
+              titleStyle: const TextStyle(
+                  fontSize: DesignConfig.titleSize,
+                  fontWeight: DesignConfig.semiBold
+              ),
               radius: 60,
             ),
             PieChartSectionData(
-              color: Colors.blueGrey,
+              color: DesignConfig.viewMoodColor,
               value: neutral.toDouble(),
               title: '😐 $neutral',
+              titleStyle: const TextStyle(
+                  fontSize: DesignConfig.titleSize,
+                  fontWeight: DesignConfig.semiBold
+              ),
               radius: 60,
             ),
             PieChartSectionData(
-              color: Colors.red,
+              color: DesignConfig.cleanDataColor.withOpacity(0.8),
               value: negative.toDouble(),
               title: '😞 $negative',
+              titleStyle: const TextStyle(
+                fontSize: DesignConfig.titleSize,
+                fontWeight: DesignConfig.semiBold
+              ),
               radius: 60,
             ),
           ],

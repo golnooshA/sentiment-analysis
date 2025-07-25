@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sentiment_chatbot/presentation/screens/today_habit_page.dart';
+import 'package:sentiment_chatbot/presentation/widgets/app_bar.dart';
 import '../../core/config/design_config.dart';
 import '../../utils/hive_utils.dart';
-import 'habit_list_page.dart';
-import 'habit_entry_page.dart';
 import 'habit_mood_page.dart';
 import 'mood_log_page.dart';
 import 'mood_trends_page.dart';
 import '../widgets/evaluate_button.dart';
+import 'my_habits.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,70 +19,83 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Habit Tracker AI', style: TextStyle(fontWeight: FontWeight.w600)),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              EvaluateButton(
-                label: 'Add Habit',
-                backgroundColor: DesignConfig.addHabbitColor,
-                textColor: DesignConfig.buttonTextColor,
-                onPressed: () => navigateTo(context, const HabitListPage()),
-              ),
-              const SizedBox(height: 12),
+      backgroundColor: DesignConfig.backgroundColor,
+      appBar: const AppBarDesign(title: 'Habit Tracker AI'),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    color: DesignConfig.addHabbitColor,
 
-              EvaluateButton(
-                label: 'Today Habit Check',
-                backgroundColor: DesignConfig.habitCheckColor,
-                textColor: DesignConfig.buttonTextColor,
-                onPressed: () => navigateTo(context, const HabitEntryPage()),
-              ),
-              const SizedBox(height: 12),
+                    borderRadius:  BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                    ),
+                  ),
+                ),
 
-              EvaluateButton(
-                label: 'Add Mood',
-                backgroundColor: DesignConfig.addMoodColor,
-                textColor: DesignConfig.buttonTextColor,
-                onPressed: () => navigateTo(context, const MoodLogPage()),
+                Image.asset(
+                  'assets/images/vector.png',
+                  height: 250,
+                  fit: BoxFit.contain,
+                ),
+              ],
+            ),
+            EvaluateButton(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(12),
+                bottomRight: Radius.circular(12),
               ),
-              const SizedBox(height: 12),
-
-              EvaluateButton(
-                label: 'Mood Trends',
-                backgroundColor: DesignConfig.viewMoodColor,
-                textColor: DesignConfig.buttonTextColor,
-                onPressed: () => navigateTo(context, const MoodTrendsPage()),
-              ),
-              const SizedBox(height: 12),
-
-              EvaluateButton(
-                label: 'Habit Impact',
-                backgroundColor: DesignConfig.habbitMoodColor,
-                textColor: DesignConfig.buttonTextColor,
-                onPressed: () => navigateTo(context, const HabitMoodInsightPage()),
-              ),
-              const SizedBox(height: 12),
-
-              EvaluateButton(
-                label: 'Clean All Data',
-                backgroundColor: DesignConfig.cleanDataColor,
-                textColor: DesignConfig.buttonTextColor,
-                onPressed: () {
-                  clearAllHiveData();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('🗑 All data cleared!')),
-                  );
-                },
-              ),
-            ],
-          ),
+              size: const Size(double.infinity, 50),
+              label: 'Add Habit',
+              backgroundColor: DesignConfig.addHabbitColor,
+              onPressed: () => navigateTo(context, const MyHabitsPage()),
+            ),
+            const SizedBox(height: 16),
+            EvaluateButton(
+              label: 'Today Habit Check',
+              backgroundColor: DesignConfig.habitCheckColor,
+              onPressed: () => navigateTo(context, const TodayHabitsPage()),
+            ),
+            const SizedBox(height: 16),
+            EvaluateButton(
+              label: 'Add Mood',
+              backgroundColor: DesignConfig.addMoodColor,
+              onPressed: () => navigateTo(context, const MoodLogPage()),
+            ),
+            const SizedBox(height: 16),
+            EvaluateButton(
+              label: 'Mood Trends',
+              backgroundColor: DesignConfig.viewMoodColor,
+              onPressed: () => navigateTo(context, const MoodTrendsPage()),
+            ),
+            const SizedBox(height: 16),
+            EvaluateButton(
+              label: 'Habit Impact',
+              backgroundColor: DesignConfig.habbitMoodColor,
+              onPressed: () => navigateTo(context, const HabitMoodInsightPage()),
+            ),
+            const SizedBox(height: 16),
+            EvaluateButton(
+              label: 'Clean All Data',
+              backgroundColor: DesignConfig.cleanDataColor,
+              onPressed: () {
+                clearAllHiveData();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('🗑 All data cleared!')),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 }
-

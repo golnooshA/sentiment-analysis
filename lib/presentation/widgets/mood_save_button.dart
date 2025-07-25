@@ -17,7 +17,7 @@ class MoodSaveButton extends StatelessWidget {
       ),
       child: const Text(
         'Save Mood',
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        style: TextStyle(color: DesignConfig.textColor, fontWeight: FontWeight.w500),
       ),
     );
   }

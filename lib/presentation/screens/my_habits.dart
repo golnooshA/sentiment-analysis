@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../../core/config/design_config.dart';
 import '../../models/habit.dart';
+import '../widgets/app_bar.dart';
 import '../widgets/habit_tile.dart';
 import '../widgets/input_field.dart';
 
-class HabitListPage extends StatefulWidget {
-  const HabitListPage({super.key});
+class MyHabitsPage extends StatefulWidget {
+  const MyHabitsPage({super.key});
 
   @override
-  _HabitListPageState createState() => _HabitListPageState();
+  _MyHabitsPageState createState() => _MyHabitsPageState();
 }
 
-class _HabitListPageState extends State<HabitListPage> {
+class _MyHabitsPageState extends State<MyHabitsPage> {
   final TextEditingController _habitController = TextEditingController();
 
   void _addHabit() {
@@ -33,7 +35,9 @@ class _HabitListPageState extends State<HabitListPage> {
     final habits = Hive.box<Habit>('habits');
 
     return Scaffold(
-      appBar: AppBar(title: const Text('My Habits')),
+      appBar: const AppBarDesign(title: 'My Habits'),
+      backgroundColor: DesignConfig.backgroundColor,
+
       body: Column(
         children: [
           InputField(
@@ -45,7 +49,9 @@ class _HabitListPageState extends State<HabitListPage> {
               valueListenable: habits.listenable(),
               builder: (context, Box<Habit> box, _) {
                 if (box.values.isEmpty) {
-                  return const Center(child: Text('No habits yet.'));
+                  return const Center(child: Text('📝 No habits found. Please add one first!',
+                      style: TextStyle(fontSize: DesignConfig.headerSize,
+                          color: DesignConfig.subTextColor)));
                 }
                 return ListView.builder(
                   itemCount: box.length,
