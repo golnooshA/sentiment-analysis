@@ -102,6 +102,9 @@ flutter:
     <td align="center">
       <img src="assets/screens/mood_trends.png" width="120" /><br>
     </td>
+    <td align="center">
+      <img src="assets/screens/habit_impact.png" width="120" /><br>
+    </td>
   </tr>
 </table>
 
