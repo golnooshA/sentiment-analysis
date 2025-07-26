@@ -58,8 +58,8 @@ A mobile app built with **Flutter** that helps users track their daily habits an
 ### Setup Instructions:
 
 ```bash
-git clone https://github.com/your-username/habit-mood-tracker.git
-cd habit-mood-tracker
+git clone https://github.com/golnooshA/sentiment-analysis.git
+cd sentiment-analysis
 flutter pub get
 flutter run
 ````
